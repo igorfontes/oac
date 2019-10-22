@@ -1,6 +1,6 @@
 #Q5
 
-# a em $s0, b em $s1
+# a em $s0, b em $s1, resultado em $s2
 
 slti $t0, $s0, 0 # $t0 recebe 1 se a < 0
 slti $t1, $s1, 0 # $t1 recebe 1 se b < 0
@@ -10,5 +10,11 @@ mod_0 : sub $s0, $zero, $s0 # $s0 recebe o módulo de a
 ver_0 : bne $t1, $zero, mod_1 # se b < 0, execute as instruções de mod_0
 j multiplica
 mod_1 : sub $s1, $zero, $s1 # $s1 recebe o módulo de b
-multiplica : 
-
+beq $s0, $zero, resp_0 # se a==0, execute as instruções de resp_0
+beq $s1, $zero, resp_0 # se b==0, execute as instruções de resp_0
+multiplica : add $s2, $s2, $s1 # resultado += b
+addi $s0, $s0, -1
+beq $s0, $zero, Exit
+j multiplica
+resp_0 : addi $s2, $zero, 0 # resultado 
+Exit :
