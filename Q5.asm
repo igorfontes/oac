@@ -12,9 +12,9 @@ j multiplica
 mod_1 : sub $s1, $zero, $s1 # $s1 recebe o módulo de b
 beq $s0, $zero, resp_0 # se a==0, execute as instruções de resp_0
 beq $s1, $zero, resp_0 # se b==0, execute as instruções de resp_0
-multiplica : add $s2, $s2, $s1 # resultado += b
-addi $s0, $s0, -1
-beq $s0, $zero, Exit
+multiplica : add $s2, $s2, $s1 # soma b ao resultado
+addi $s0, $s0, -1 # decrementa 1 de a
+beq $s0, $zero, Exit # se a == 0, a multiplicação  feita por meio de somas sucessivas chegou ao fim
 j multiplica
 resp_0 : addi $s2, $zero, 0 # resultado 
 Exit :
